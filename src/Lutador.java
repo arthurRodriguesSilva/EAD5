@@ -3,14 +3,12 @@ abstract public class Lutador {
     int vida;
     int energia;
     int forca;
-    int dano;
 
-    public Lutador(String nome, int vida, int energia, int forca, int dano){
+    public Lutador(String nome, int vida, int energia, int forca){
         this.nome = nome;
         this.vida = vida;
         this.energia = energia;
         this.forca = forca;
-        this.dano =
     }
 
     public abstract void atacar(Lutador oponente);
