@@ -25,10 +25,6 @@ abstract public class Lutador {
     }
 
     public boolean estarVivo(){
-        if (this.vida > 0){
-            return true;
-        }else{
-            return false;
-        }
+        return this.vida > 0;
     }
 }

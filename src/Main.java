@@ -43,5 +43,13 @@ public class Main {
         while(lutadores[0].vida > 0){
 
         }
+        int turno = 0;
+        do{
+            System.out.println("TURNO " + turno);
+            for (int i=0; i < lutadores.length; i++){
+                Lutador atacante = lutadores[i];
+            }
+
+        }while(true);
     }
 }
