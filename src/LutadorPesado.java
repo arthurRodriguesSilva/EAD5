@@ -7,6 +7,11 @@ public class LutadorPesado extends Lutador{
 
     @Override
     public void atacar(Lutador oponente){
+        if (oponente.vida <= 0){
+            System.out.println("Oponente ja se encontra derrotado.");
+            return;
+        }
+
         if (energia < 5) {
             System.out.println(nome + "tentou atacar, porém está sem energia.");
             return;
