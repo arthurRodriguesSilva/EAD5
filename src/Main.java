@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -40,16 +41,70 @@ public class Main {
             System.out.println("===== LUTADOR " + lutadores[i].nome + " =====");
             lutadores[i].mostrarStatus();
         }
-        while(lutadores[0].vida > 0){
 
-        }
-        int turno = 0;
-        do{
-            System.out.println("TURNO " + turno);
-            for (int i=0; i < lutadores.length; i++){
-                Lutador atacante = lutadores[i];
+        System.out.println("Escolha o número do primeiro lutador (1 a " + quantidade + "):");
+        int i1 = sc.nextInt() - 1;
+        System.out.println("Escolha o número do segundo lutador (1 a " + quantidade + "):");
+        int i2 = sc.nextInt() - 1;
+
+        Lutador l1 = lutadores[i1];
+        Lutador l2 = lutadores[i2];
+
+        System.out.println("=====INÍCIO DA BATALHA=====");
+        System.out.println(l1.nome + " VS " + l2.nome);
+
+        int turno = 1;
+
+        while (l1.estarVivo() && l2.estarVivo()) {
+            System.out.println("\n===== TURNO " + turno + " =====");
+
+            System.out.println("\n===== Vez de " + l1.nome + " =====");
+            System.out.println("1 - Atacar");
+            System.out.println("2 - Especial");
+            System.out.println("3 - Defender");
+            int acao = sc.nextInt();
+
+            switch (acao) {
+                case 1 -> l1.atacar(l2);
+                case 2 -> l1.especial(l2);
+                case 3 -> l1.defender(l2);
+                default -> System.out.println("Ação inválida.");
             }
 
-        }while(true);
+            if (!l2.estarVivo()) break;
+
+            System.out.println("\n===== Vez de " + l2.nome + " =====");
+
+            int acaoIA = (int) (Math.random() * 3) + 1;
+
+            switch (acaoIA) {
+                case 1 -> {
+                    System.out.println(l2.nome + " escolheu ATACAR!");
+                    l2.atacar(l1);
+                }
+                case 2 -> {
+                    System.out.println(l2.nome + " tentou usar ESPECIAL!");
+                    l2.especial(l1);
+                }
+                case 3 -> {
+                    System.out.println(l2.nome + " escolheu DEFENDER!");
+                    l2.defender(l1);
+                }
+            }
+
+            System.out.println("===== STATUS ATUAL =====");
+            l1.mostrarStatus();
+            l2.mostrarStatus();
+
+            turno++;
+        }
+
+        System.out.println("\n===== FIM DA BATALHA =====");
+
+        if (l1.estarVivo())
+            System.out.println(l1.nome + " VENCEU!");
+        else
+            System.out.println(l2.nome + " VENCEU!");
     }
 }
+
